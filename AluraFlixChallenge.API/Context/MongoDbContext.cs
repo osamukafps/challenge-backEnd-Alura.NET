@@ -30,7 +30,7 @@ namespace AluraFlixChallenge.API.Context
         {
             get
             {
-                return _mongoDatabase.GetCollection<Video>("Video");
+                return _mongoDatabase.GetCollection<Video>("Videos");
             }
         }
 
