@@ -1,4 +1,8 @@
+using AluraFlixChallenge.API.Config;
 using AluraFlixChallenge.API.Context;
+using AluraFlixChallenge.API.Repository;
+using AluraFlixChallenge.API.Services;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,18 @@ builder.Services.AddControllers();
 //Database Configuration
 MongoDbContext.ConnectionString = builder.Configuration.GetSection("DatabaseConnection:ConnectionString").Value;
 MongoDbContext.Database = builder.Configuration.GetSection("DatabaseConnection:Database").Value;
+
+//Auto Mapper Inicialization
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Service Registry
+builder.Services.AddSingleton<IVideoService, VideoService>();
+
+//Repository
+builder.Services.AddTransient<MongoDbContext>();
+builder.Services.AddTransient<IVideoRepository, VideoRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

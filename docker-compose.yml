@@ -1,0 +1,24 @@
+version: '4'
+
+services:
+
+  mongo:
+    image: mongo
+    networks:
+      - aluraflix-network
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - /data/db
+  
+  mongo-express:
+    image: mongo-express
+    networks:
+    - aluraflix-network
+    ports:
+    - 8081:8081
+
+networks:
+  aluraflix-network:
+    driver: bridge

@@ -22,7 +22,7 @@ namespace AluraFlixChallenge.API.Context
             }
             catch(Exception ex)
             {
-                throw new Exception($"Couldn't connect to server: {ex.Message}");
+                throw new Exception($"Couldn't connect to server: '{ex.Message}' ");
             }
         }
 
