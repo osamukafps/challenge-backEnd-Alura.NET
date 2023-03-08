@@ -5,6 +5,10 @@ namespace AluraFlixChallenge.API.Services
 {
     public interface IVideoService
     {
-        Task<InternalResponses<VideoDTO>> GetVideos();
+        Task<InternalResponses> GetVideos();
+        Task<InternalResponses> GetVideoById(long id);
+        Task<InternalResponses> PostVideo(VideoDTO videoDTO);
+        Task<InternalResponses> UpdateVideo(VideoDTO videoDTO);
+        Task<InternalResponses> RemoveVideo(long id);
     }
 }
