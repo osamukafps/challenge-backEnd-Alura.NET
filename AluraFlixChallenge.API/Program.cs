@@ -21,10 +21,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Service Registry
 builder.Services.AddSingleton<IVideoService, VideoService>();
+builder.Services.AddSingleton<ICategoryService, CategoryService>();
 
 //Repository
 builder.Services.AddTransient<MongoDbContext>();
 builder.Services.AddTransient<IVideoRepository, VideoRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

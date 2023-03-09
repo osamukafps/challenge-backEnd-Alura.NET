@@ -11,6 +11,7 @@ namespace AluraFlixChallenge.API.Config
             var mappingConfig = new MapperConfiguration(config =>
             {
                 config.CreateMap<Video, VideoDTO>().ReverseMap();
+                config.CreateMap<Category, CategoryDTO>().ReverseMap();
             });
 
             return mappingConfig;

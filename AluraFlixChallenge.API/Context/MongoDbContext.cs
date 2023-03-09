@@ -34,5 +34,13 @@ namespace AluraFlixChallenge.API.Context
             }
         }
 
+        public IMongoCollection<Category> Categories
+        {
+            get
+            {
+                return _mongoDatabase.GetCollection<Category>("Categories");
+            }
+        }
+
     }
 }

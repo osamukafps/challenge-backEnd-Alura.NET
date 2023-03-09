@@ -1,12 +1,18 @@
-﻿namespace AluraFlixChallenge.API.Entities
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace AluraFlixChallenge.API.Entities
 {
+    [BsonIgnoreExtraElements]
+    [BsonNoId]
     public class Category
     {
+        [BsonElement("id")]
         public long Id { get; set; }
 
         private string title;
         private string color;
 
+        [BsonElement("title")]
         public string Title
         {
             get
@@ -19,11 +25,12 @@
             }
         }
 
+        [BsonElement("color")]
         public string Color
         {
             get
             {
-                return title;
+                return color;
             }
             set
             {
