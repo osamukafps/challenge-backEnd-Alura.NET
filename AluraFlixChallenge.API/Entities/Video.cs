@@ -19,7 +19,13 @@ namespace AluraFlixChallenge.API.Entities
         public long CategoryId
         {
             get { return categoryId; }
-            set { categoryId = value; }
+            set 
+            {
+                if (value == 0)
+                    categoryId = 1;
+                else
+                    categoryId = value; 
+            }
         }
 
         [BsonElement("title")]
