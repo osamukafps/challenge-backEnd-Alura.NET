@@ -5,20 +5,8 @@ namespace AluraFlixChallenge.API.Data
     public class VideoDTO
     {
         [Required(ErrorMessage = "The ID field is required")]
-        public long Id 
-        {
-            get
-            {
-                return Id;
-            }
-            set
-            {
-                if (value <= 0)
-                    throw new ArgumentException("id field must be bigger than zero");
-
-                Id = value;
-            }
-        }
+        [Range(1, int.MaxValue, ErrorMessage = "The field Id has to be bigger than zero")]
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "The Title field is required")]
         public string Title { get; set; }
