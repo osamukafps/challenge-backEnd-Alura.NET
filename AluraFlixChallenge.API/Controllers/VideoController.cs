@@ -12,14 +12,27 @@ namespace AluraFlixChallenge.API.Controllers
 
         public VideoController(IVideoService service)
         {
-            _videoService= service;
+            _videoService = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetVideos()
+        public async Task<IActionResult> GetVideos(string? title)
         {
             try
             {
+                if(!string.IsNullOrEmpty(title))
+                {
+                    var getVideosByTitle = await _videoService.GetVideosByTitle(title);
+
+                    if (getVideosByTitle.Code == 204)
+                        return StatusCode(204, getVideosByTitle);
+
+                    else if (getVideosByTitle.Code != 200)
+                        return StatusCode(getVideosByTitle.Code, getVideosByTitle);
+
+                    return StatusCode(200, getVideosByTitle);
+                }
+
                 var listVideos = await _videoService.GetVideos();
 
                 if (listVideos.Code != 200)
@@ -40,7 +53,7 @@ namespace AluraFlixChallenge.API.Controllers
             {
                 var video = await _videoService.GetVideoById(id);
 
-                if(video.Code == 204)
+                if (video.Code == 204)
                     return StatusCode(204, video);
 
                 return StatusCode(200, video);
@@ -58,12 +71,12 @@ namespace AluraFlixChallenge.API.Controllers
             {
                 var postVideo = await _videoService.PostVideo(videoDTO);
 
-                if(postVideo.Code != 200)
+                if (postVideo.Code != 200)
                     return StatusCode(postVideo.Code, postVideo);
 
                 return StatusCode(200, postVideo);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
@@ -76,12 +89,12 @@ namespace AluraFlixChallenge.API.Controllers
             {
                 var updateResult = await _videoService.UpdateVideo(videoDTO);
 
-                if(updateResult.Code != 200)
+                if (updateResult.Code != 200)
                     return StatusCode(updateResult.Code, updateResult);
 
                 return StatusCode(200, updateResult);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }
@@ -99,7 +112,7 @@ namespace AluraFlixChallenge.API.Controllers
 
                 return StatusCode(204, deleteAttempt);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
             }

@@ -13,7 +13,7 @@ namespace AluraFlixChallenge.API.Services
 
         public VideoService(IVideoRepository repository)
         {
-            _repository= repository;
+            _repository = repository;
         }
 
         public async Task<InternalResponses> GetVideos()
@@ -26,7 +26,7 @@ namespace AluraFlixChallenge.API.Services
                     return new InternalResponses
                     {
                         Code = 204,
-                        Data = (object) new VideoDTO(),
+                        Data = (object)new VideoDTO(),
                         Message = "No items found in database",
                         Exception = null
                     };
@@ -39,7 +39,7 @@ namespace AluraFlixChallenge.API.Services
                     Exception = null
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new InternalResponses
                 {
@@ -61,7 +61,7 @@ namespace AluraFlixChallenge.API.Services
                     return new InternalResponses
                     {
                         Code = 204,
-                        Data = (object) new VideoDTO(),
+                        Data = (object)new VideoDTO(),
                         Message = "No items found in database",
                         Exception = null
                     };
@@ -74,7 +74,7 @@ namespace AluraFlixChallenge.API.Services
                     Exception = null
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new InternalResponses
                 {
@@ -94,7 +94,7 @@ namespace AluraFlixChallenge.API.Services
 
                 if (!validateData.Item1)
                 {
-                    string errors = string.Join(",", validateData.Item2); 
+                    string errors = string.Join(",", validateData.Item2);
                     return new InternalResponses
                     {
                         Code = 500,
@@ -102,7 +102,7 @@ namespace AluraFlixChallenge.API.Services
                         Message = errors,
                         Exception = null
                     };
-                }                  
+                }
 
                 var postVideo = await _repository.PostVideo(videoDTO);
 
@@ -123,7 +123,7 @@ namespace AluraFlixChallenge.API.Services
                     Exception = null
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new InternalResponses
                 {
@@ -158,7 +158,7 @@ namespace AluraFlixChallenge.API.Services
                     Exception = null
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new InternalResponses
                 {
@@ -193,7 +193,7 @@ namespace AluraFlixChallenge.API.Services
                     Exception = null
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new InternalResponses
                 {
@@ -205,6 +205,43 @@ namespace AluraFlixChallenge.API.Services
             }
         }
 
+        public async Task<InternalResponses> GetVideosByTitle(string name)
+        {
+            try
+            {
+                var getVideos = await _repository.GetAndFilterVideosByName(name);
+
+                if (getVideos.Count <= 0)
+                    return new InternalResponses
+                    {
+                        Code = 204,
+                        Data = (object)new VideoDTO(),
+                        Message = "No items found",
+                        Exception = null
+                    };
+
+                return new InternalResponses
+                {
+                    Code = 200,
+                    Data = new { videos = getVideos },
+                    Message = "OK",
+                    Exception = null
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new InternalResponses
+                {
+                    Code = 500,
+                    Data = (object)new VideoDTO(),
+                    Message = ex.Message,
+                    Exception = ex.InnerException.ToString()
+                };
+            }       
+        }
+
+
         #region Private Methods
 
         private (bool, List<string>) ValidateModel(VideoDTO videoDTO)
@@ -214,16 +251,16 @@ namespace AluraFlixChallenge.API.Services
 
             Validator.TryValidateObject(videoDTO, context, validateResult, true);
 
-            if(validateResult.Count > 0)
+            if (validateResult.Count > 0)
             {
                 List<string> errors = new();
 
-                foreach(var result in validateResult)
+                foreach (var result in validateResult)
                 {
                     errors.Add(result.ErrorMessage);
                     Console.WriteLine(result.ErrorMessage);
                 }
-                
+
                 return (false, errors);
             }
 

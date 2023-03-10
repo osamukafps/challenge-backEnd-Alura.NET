@@ -10,5 +10,6 @@ namespace AluraFlixChallenge.API.Services
         Task<InternalResponses> PostVideo(VideoDTO videoDTO);
         Task<InternalResponses> UpdateVideo(VideoDTO videoDTO);
         Task<InternalResponses> RemoveVideo(long id);
+        Task<InternalResponses> GetVideosByTitle(string name);
     }
 }

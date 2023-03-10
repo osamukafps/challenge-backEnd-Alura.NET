@@ -10,5 +10,6 @@ namespace AluraFlixChallenge.API.Repository
         Task<bool> PostVideo(VideoDTO video);
         Task<VideoDTO> UpdateVideo(VideoDTO videoDTO);
         Task<bool> RemoveVideo(long id);
+        Task<List<VideoDTO>> GetAndFilterVideosByName(string name);
     }
 }

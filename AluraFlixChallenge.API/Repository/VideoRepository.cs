@@ -2,6 +2,7 @@
 using AluraFlixChallenge.API.Data;
 using AluraFlixChallenge.API.Entities;
 using AutoMapper;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace AluraFlixChallenge.API.Repository
@@ -135,6 +136,24 @@ namespace AluraFlixChallenge.API.Repository
             {
                 Console.WriteLine($"ERROR: {ex.Message}");
                 return false;
+            }
+        }
+
+        public async Task<List<VideoDTO>> GetAndFilterVideosByName(string name)
+        {
+            try
+            {
+                var builder = Builders<Video>.Filter;
+                var regex = new BsonRegularExpression(name, "i");
+                var filter = builder.Regex("title", regex);
+
+                var result = _context.Videos.Find(filter).ToList();
+
+                return _mapper.Map<List<VideoDTO>>(result);
+            }
+            catch(Exception ex)
+            {
+                return new List<VideoDTO>();
             }
         }
     }
