@@ -10,5 +10,6 @@ namespace AluraFlixChallenge.API.Services
         Task<InternalResponses> PostCategory(CategoryDTO categoryDTO);
         Task<InternalResponses> UpdateCategory(CategoryDTO categoryDTO);
         Task<InternalResponses> RemoveCategory(long id);
+        Task<InternalResponses> GetVideosByCategoryId(long categoryId);
     }
 }

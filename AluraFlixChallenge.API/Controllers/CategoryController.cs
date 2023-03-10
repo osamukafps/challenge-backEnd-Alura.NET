@@ -57,6 +57,28 @@ namespace AluraFlixChallenge.API.Controllers
             }
         }
 
+
+        [HttpGet("{id}/videos/")]
+        public async Task<IActionResult> GetVideosByCategoryId(long id)
+        {
+            try
+            {
+                var videosByCategory = await _categoryService.GetVideosByCategoryId(id);
+
+                if (videosByCategory.Code == 204)
+                    return StatusCode(204, videosByCategory);
+
+                else if (videosByCategory.Code != 200)
+                    return StatusCode(500, videosByCategory);
+
+                return StatusCode(200, videosByCategory);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostCategory(CategoryDTO categoryDTO)
         {

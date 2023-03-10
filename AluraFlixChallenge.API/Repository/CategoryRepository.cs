@@ -140,5 +140,25 @@ namespace AluraFlixChallenge.API.Repository
                 return false;
             }
         }
+
+        public async Task<List<VideoDTO>> GetVideosByCategoryId(long categoryId)
+        {
+            try
+            {
+                var getVideos = _context.Videos.Find<Video>(video => video.CategoryId == categoryId)
+                                               .Project<Video>(Builders<Video>.Projection.Exclude("_id"))
+                                               .ToList();
+
+                if(getVideos.Count <= 0) 
+                    return new List<VideoDTO>();
+
+                return _mapper.Map<List<VideoDTO>>(getVideos);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new List<VideoDTO>();
+            }
+        }
     }
 }

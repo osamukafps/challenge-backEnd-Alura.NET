@@ -9,5 +9,6 @@ namespace AluraFlixChallenge.API.Repository
         Task<bool> PostCategory(CategoryDTO categoryDTO);
         Task<CategoryDTO> UpdateCategory(CategoryDTO categoryDTO);
         Task<bool> RemoveCategory(long id);
+        Task<List<VideoDTO>> GetVideosByCategoryId(long categoryId);
     }
 }

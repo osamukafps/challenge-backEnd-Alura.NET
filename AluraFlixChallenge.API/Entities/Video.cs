@@ -10,9 +10,17 @@ namespace AluraFlixChallenge.API.Entities
         [BsonElement("id")]
         public long Id { get; set; }
 
+        private long categoryId;
         private string title;
         private string description;
         private string url;
+
+        [BsonElement("categoryId")]
+        public long CategoryId
+        {
+            get { return categoryId; }
+            set { categoryId = value; }
+        }
 
         [BsonElement("title")]
         public string Title 

@@ -2,6 +2,7 @@
 using AluraFlixChallenge.API.Data;
 using AluraFlixChallenge.API.Repository;
 using AluraFlixChallenge.API.Responses;
+using Amazon.Runtime.Internal;
 
 namespace AluraFlixChallenge.API.Services
 {
@@ -189,5 +190,42 @@ namespace AluraFlixChallenge.API.Services
                 };
             }
         }
+
+        public async Task<InternalResponses> GetVideosByCategoryId(long categoryId)
+        {
+            try
+            {
+                var videosByCategory = await _categoryRepository.GetVideosByCategoryId(categoryId);
+
+                if (videosByCategory.Count <= 0)
+                    return new InternalResponses
+                    {
+                        Code = 204,
+                        Data = (object)new VideoDTO(),
+                        Message = "No videos in this category",
+                        Exception = null
+                    };
+
+                return new InternalResponses
+                {
+                    Code = 200,
+                    Data = new { videos = videosByCategory },
+                    Message = "OK",
+                    Exception = null
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new InternalResponses
+                {
+                    Code = 500,
+                    Data = (object)new VideoDTO(),
+                    Message = ex.Message,
+                    Exception = ex.InnerException.ToString()
+                };
+            }
+        }
     }
 }
+

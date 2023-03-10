@@ -8,6 +8,8 @@ namespace AluraFlixChallenge.API.Data
         [Range(1, int.MaxValue, ErrorMessage = "The field Id has to be bigger than zero")]
         public long Id { get; set; }
 
+        public long CategoryId { get; set; }
+
         [Required(ErrorMessage = "The Title field is required")]
         public string Title { get; set; }
 
