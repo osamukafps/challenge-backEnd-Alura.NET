@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AluraFlixChallenge.API", "AluraFlixChallenge.API\AluraFlixChallenge.API.csproj", "{71EB3FD9-F82F-477C-8FF3-EA65D70B069B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AluraFlixChallenge.API", "AluraFlixChallenge.API\AluraFlixChallenge.API.csproj", "{71EB3FD9-F82F-477C-8FF3-EA65D70B069B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AluraFlixChallenge.Tests", "AluraFlixChallenge.Tests\AluraFlixChallenge.Tests.csproj", "{D586F537-DBF0-4CD0-8EC6-EAB0B101A858}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{71EB3FD9-F82F-477C-8FF3-EA65D70B069B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71EB3FD9-F82F-477C-8FF3-EA65D70B069B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71EB3FD9-F82F-477C-8FF3-EA65D70B069B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D586F537-DBF0-4CD0-8EC6-EAB0B101A858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D586F537-DBF0-4CD0-8EC6-EAB0B101A858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D586F537-DBF0-4CD0-8EC6-EAB0B101A858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D586F537-DBF0-4CD0-8EC6-EAB0B101A858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
