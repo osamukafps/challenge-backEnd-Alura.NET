@@ -1,5 +1,6 @@
 ﻿using AluraFlixChallenge.API.Data;
 using AluraFlixChallenge.API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AluraFlixChallenge.API.Controllers
@@ -16,7 +17,8 @@ namespace AluraFlixChallenge.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetVideos(string? title)
+        [Authorize]
+        public async Task<IActionResult> GetVideos(string? title )
         {
             try
             {

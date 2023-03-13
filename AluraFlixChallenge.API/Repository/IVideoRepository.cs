@@ -5,7 +5,7 @@ namespace AluraFlixChallenge.API.Repository
 {
     public interface IVideoRepository
     {
-        Task<List<VideoDTO>> GetVideos();
+        Task<List<VideoDTO>> GetVideos(int pageNumber = 1, int pageSize = 2);
         Task<VideoDTO> GetVideoById(long id);
         Task<bool> PostVideo(VideoDTO video);
         Task<VideoDTO> UpdateVideo(VideoDTO videoDTO);

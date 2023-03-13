@@ -18,13 +18,17 @@ namespace AluraFlixChallenge.API.Repository
             _mapper = mapper;
         }
 
-        public async Task<List<VideoDTO>> GetVideos()
+        public async Task<List<VideoDTO>> GetVideos(int pageNumber = 1, int pageSize = 5)
         {
             try
             {
                 Func<List<VideoDTO>> GetAllVideos = () =>
                 {
-                    var videosList = _context.Videos.Find(x => true).ToList();
+                    var videosList = _context.Videos
+                                             .Find(x => true)
+                                             .Skip((pageNumber -1 ) * pageSize)
+                                             .Limit(pageSize)
+                                             .ToList();
 
                     if (videosList.Count == 0)
                         return new List<VideoDTO>();
